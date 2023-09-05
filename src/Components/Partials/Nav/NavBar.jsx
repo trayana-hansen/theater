@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { NavLink} from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
+import Logo from "../../../Assets/SVG/logo.svg";
 
 const NavBar = () => {
   /* Setting up the variable to handle the state of mobile menu */
@@ -11,11 +12,7 @@ const NavBar = () => {
       {/* Start of the navigation component */}
       <nav className="navigation">
         {/* Logo */}
-        <img
-          className="brand-name"
-          src={require("../../../Assets/SVG/logo.svg")}
-          alt="logo"
-        />
+        <img className="brand-name" src={Logo} alt="logo" />
         {/* Button with a onclick event from useState hook used  for  a hamburger menu */}
         <button
           className="hamburger"
@@ -38,19 +35,19 @@ const NavBar = () => {
               {" "}
               <path
                 d="M4 18L20 18"
-                stroke="#30454c"
+                stroke="#d39d5b"
                 strokeWidth="2"
                 strokeLinecap="round"
               ></path>{" "}
               <path
                 d="M4 12L20 12"
-                stroke="#30454c"
+                stroke="#d39d5b"
                 strokeWidth="2"
                 strokeLinecap="round"
               ></path>{" "}
               <path
                 d="M4 6L20 6"
-                stroke="#30454c"
+                stroke="#d39d5b"
                 strokeWidth="2"
                 strokeLinecap="round"
               ></path>{" "}
@@ -109,8 +106,6 @@ const NavBar = () => {
           </ul>
         </div>
       </nav>
-
-
     </>
   );
 };
