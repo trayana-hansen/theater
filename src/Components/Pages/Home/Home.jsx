@@ -1,10 +1,11 @@
 import React from "react";
 import "./Home.scss";
+import EventCard from "../Home/EventCard";
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <EventCard />
     </div>
   );
 };
