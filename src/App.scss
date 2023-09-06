@@ -1,1 +1,10 @@
+@use "./Assets/bundles.scss" as f;
 
+* {
+  font-family: f.$titillium;
+
+  h1,
+  h2 {
+    font-family: f.$playfair;
+  }
+}

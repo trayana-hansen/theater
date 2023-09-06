@@ -1,0 +1,45 @@
+@use "../../../Assets/bundles.scss" as c;
+
+.footerContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0.5rem 0rem;
+  color: white;
+  background-color: c.$grey;
+
+  .innerFlex {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .map {
+    margin-top: 2rem;
+  }
+
+  .socials {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+  h3 {
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    .innerFlex {
+      margin-left: 3rem;
+    }
+  }
+}
