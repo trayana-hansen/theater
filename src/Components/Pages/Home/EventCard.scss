@@ -62,3 +62,27 @@
     }
   }
 }
+.allEvents {
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+  margin-bottom: 2rem;
+  button {
+    margin-bottom: 0.4rem;
+    padding: 0.6rem;
+    color: white;
+    font-weight: bold;
+    border: none;
+    width: 20%;
+    background-color: c.$brown;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .allEvents {
+    justify-content: center;
+    button {
+      width: 40%;
+    }
+  }
+}

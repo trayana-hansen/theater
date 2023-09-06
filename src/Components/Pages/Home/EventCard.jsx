@@ -57,7 +57,9 @@ const EventCard = () => {
             );
           })}
       </div>
-      <button id="allEvents">SE ALLE FORESTILLINGER</button>
+      <div className="allEvents">
+        <button>SE ALLE FORESTILLINGER</button>
+      </div>
     </>
   );
 };
