@@ -8,7 +8,7 @@
   .singleEvent {
     display: grid;
     grid-template-columns: 20% 20% 20% 35%;
-    border: 1px solid c.$gold;
+    border: 1px solid c.$brown;
     align-items: center;
     width: 100%;
 
@@ -23,7 +23,7 @@
       max-width: 80%;
       height: 7.5em;
       align-items: left;
-      border: 6px solid c.$gold;
+      border: 6px solid c.$brown;
       display: block;
       object-fit: cover;
     }

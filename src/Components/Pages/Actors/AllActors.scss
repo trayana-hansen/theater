@@ -1,0 +1,98 @@
+@use "../../../Assets/bundles.scss" as c;
+
+.allActorsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 96.57%;
+  border: solid 1px c.$brown;
+  padding: 1rem;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.2rem;
+    color: c.$gold;
+    margin: 1rem;
+    font-weight: 400;
+  }
+
+  .actorCard {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    margin-left: 1rem;
+
+    img {
+      max-width: 80%;
+      display: block;
+      object-fit: cover;
+      height: 100%;
+    }
+
+    .infoActor {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 7; /* number of lines to show */
+      line-clamp: 10;
+      -webkit-box-orient: vertical;
+
+      h2 {
+        margin-top: 0;
+        padding-top: 0;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        color: c.$grey;
+      }
+      p {
+        color: c.$gold;
+      }
+    }
+    .button {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+
+      button {
+        background-color: c.$grey;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 0.6rem;
+        width: 50%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .allActorsWrapper {
+    border: none;
+
+    .actorCard {
+      width: 90%;
+      margin: 0;
+
+      img {
+        max-width: 100%;
+        height: 9em;
+      }
+      h2 {
+        font-size: 1.1em;
+        margin: 0.5rem;
+      }
+      p {
+        font-size: 0.9em;
+        margin: 0.5rem;
+      }
+
+      .button {
+        flex-direction: column;
+        align-items: end;
+        margin: 0.5rem;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

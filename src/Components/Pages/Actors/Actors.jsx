@@ -1,11 +1,14 @@
 import React from "react";
 import "./Actors.scss";
+import AllActors from "./AllActors";
+import Hero from "../../Partials/Hero/Hero";
 
 const Actors = () => {
   return (
-    <div>
-      <h1>Actors</h1>
-    </div>
+    <>
+      <Hero />
+      <AllActors />
+    </>
   );
 };
 
