@@ -1,10 +1,12 @@
 import React from "react";
-import "./Events.scss";
+import EventsAll from "../Events/EventsAll";
+import Hero from "../../Partials/Hero/Hero";
 
 const Events = () => {
   return (
     <div>
-      <h1>Events</h1>
+      <Hero />
+      <EventsAll />
     </div>
   );
 };
