@@ -34,12 +34,7 @@ const Hero = () => {
             console.log(data);
             return (
               <figure key={data.id} className="heroFigure">
-                <div className="imgWrapper">
-                  <img
-                    src={`http://localhost:4000/Assets/Images/events/small/${data.image}`}
-                    alt={data.title}
-                  />
-                </div>
+
                 <div className="info">
                   <figcaption>
                     <p>{data.stage.name}</p>
@@ -51,6 +46,12 @@ const Hero = () => {
                     <h3>{data.title}</h3>
                     <p id="genre">{data.genre.name}</p>
                   </figcaption>
+                </div>
+                <div className="imgWrapper">
+                  <img
+                    src={`http://localhost:4000/Assets/Images/events/small/${data.image}`}
+                    alt={data.title}
+                  />
                 </div>
               </figure>
             );

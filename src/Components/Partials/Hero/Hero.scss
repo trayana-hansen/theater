@@ -1,59 +1,69 @@
 @use "../../../Assets/bundles.scss" as c;
 
-.heroFigure {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  border: solid 1.5px c.$gold;
+.heroWrapper {
+  .heroFigure {
+    display: grid;
+    grid-template-columns: 30% 70%;
 
-  img {
-    border: solid 7px c.$gold;
-    display: block;
-    object-fit: contain;
-  }
-  .info {
-    margin-left: 17%;
+    .imgWrapper {
+      width: 98%;
+      border: solid 6px c.$brown;
 
-    figcaption {
-      text-align: right;
-      margin-top: 70%;
-
-      hr {
-        background-color: c.$grey;
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
+    }
 
-      #genre {
-        text-transform: uppercase;
-        padding-bottom: 0;
-        margin-bottom: 0;
-      }
+    .info {
+      border: solid 1px c.$brown;
 
-      h3 {
-        font-size: 2rem;
+      figcaption {
         text-align: right;
-        color: c.$gold;
-        font-weight: 500;
-        line-height: 1em;
-        margin-left: 2em;
-        margin-bottom: 0.7rem;
-        font-family: c.$playfair;
-        font-weight: 600;
-      }
+        margin-top: 70%;
+        margin-right: 17%;
 
-      p {
-        text-transform: uppercase;
-        color: c.$grey;
-        font-size: 0.9rem;
-      }
-      #date {
-        font-weight: 700;
+        hr {
+          background-color: c.$grey;
+          margin-left: 17%;
+        }
+
+        #genre {
+          text-transform: uppercase;
+          padding-bottom: 0;
+          margin-bottom: 0.4rem;
+          font-size: 1.5rem;
+        }
+
+        h3 {
+          font-size: 2rem;
+          text-align: right;
+          color: c.$gold;
+          font-weight: 500;
+          line-height: 1em;
+          margin-left: 2em;
+          margin-bottom: 0.7rem;
+          font-family: c.$playfair;
+          font-weight: 600;
+        }
+
+        p {
+          text-transform: uppercase;
+          color: c.$grey;
+          font-size: 0.9rem;
+        }
+        #date {
+          font-weight: 700;
+        }
       }
     }
   }
-}
 
-@media screen and (max-width: 1000px) {
-  .heroFigure {
-    display: none;
+  @media screen and (max-width: 1000px) {
+    .heroFigure {
+      display: none;
+    }
   }
 }
