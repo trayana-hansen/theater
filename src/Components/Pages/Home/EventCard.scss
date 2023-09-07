@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
-  figure {
+  .eventFigure {
     border: solid 1.5px c.$gold;
 
     .imgWrapper {

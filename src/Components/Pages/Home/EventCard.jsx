@@ -11,7 +11,7 @@ const EventCard = () => {
   };
 
   useEffect(() => {
-    const url = `http://localhost:4000/events?limit=3&attributes=id,title,description,image,duration_minutes,price,startdate,stopdate`;
+    const url = `http://localhost:4000/events?orderby=startdate&dir=DESC&limit=3&attributes=id,title,description,image,duration_minutes,price,startdate,stopdate`;
 
     const getData = async () => {
       try {
@@ -33,7 +33,7 @@ const EventCard = () => {
           events.map((data) => {
             console.log(data);
             return (
-              <figure key={data.id}>
+              <figure key={data.id} className="eventFigure">
                 <div className="imgWrapper">
                   <img
                     src={`http://localhost:4000/Assets/Images/events/small/${data.image}`}
