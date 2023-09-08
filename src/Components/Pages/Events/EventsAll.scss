@@ -47,12 +47,19 @@
       margin-left: 10rem;
       width: 70%;
 
-      .readMore {
-        background-color: c.$grey;
+      a {
+        text-decoration: none;
         color: white;
         font-weight: bold;
+      }
+
+      .readMore {
+        background-color: c.$grey;
+
         border: none;
         padding: 0.6rem;
+
+
       }
       .ticket {
         background-color: c.$gold;

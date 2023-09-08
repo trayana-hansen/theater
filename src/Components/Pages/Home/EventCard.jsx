@@ -53,7 +53,9 @@ const EventCard = () => {
                     <button className="readMore">
                       <Link to={`/events/${data.id}`}>LÆS MERE</Link>
                     </button>
-                    <button className="ticket">KØB BILLET</button>
+                    <button className="ticket">
+                      <Link to="/tickets">KØB BILLET</Link>
+                    </button>
                   </div>
                 </figcaption>
               </figure>

@@ -2,6 +2,7 @@ import "./ActorDetails.scss";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ActorDetails = () => {
   const [data, setData] = useState([]);
@@ -41,6 +42,12 @@ const ActorDetails = () => {
                 <p id="description">{data.description}</p>
               </div>
             </figure>
+
+            <div className="allActors">
+              <button>
+                <Link to="/actors">ALLE SKUESPILLERE</Link>
+              </button>
+            </div>
           </div>
         )}
       </div>

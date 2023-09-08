@@ -55,11 +55,15 @@
 
       button {
         background-color: c.$grey;
-        color: white;
-        font-weight: bold;
         border: none;
         padding: 0.6rem;
         width: 50%;
+
+        a {
+          text-decoration: none;
+          color: white;
+          font-weight: bold;
+        }
       }
     }
   }

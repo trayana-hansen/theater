@@ -7,6 +7,7 @@ import Events from "../../Pages/Events/Events";
 import NotFound from "../../Pages/NotFound/NotFound";
 import EventDetails from "../../Pages/Events/EventDetails";
 import ActorDetails from "../../Pages/Actors/ActorDetails";
+import Tickets from "../../Pages/Tickets/Tickets";
 
 /* Creating a react component */
 const AppRouter = () => {
@@ -27,6 +28,7 @@ const AppRouter = () => {
         <Route path=":actor_id" element={<ActorDetails />} />
       </Route>
       <Route path="/login" element={<Login />} />
+      <Route path="/tickets" element={<Tickets />} />
 
       {/* Routing to a 404 page */}
       <Route path="*" element={<NotFound />} />

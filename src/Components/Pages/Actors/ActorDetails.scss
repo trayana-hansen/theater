@@ -37,6 +37,23 @@
         }
       }
     }
+    .allActors {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+
+      button {
+        background-color: c.$brown;
+        border: none;
+        padding: 0.5rem;
+
+        a {
+          text-decoration: none;
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
 @media screen and (max-width: 1000px) {
