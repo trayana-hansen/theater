@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./EventCard.scss";
+import { Link } from "react-router-dom";
 
 const EventCard = () => {
   const [events, setEvents] = useState([]);
@@ -49,7 +50,9 @@ const EventCard = () => {
 
                   <h2>{data.title}</h2>
                   <div className="buttons">
-                    <button className="readMore">LÆS MERE</button>
+                    <button className="readMore">
+                      <Link to={`/events/${data.id}`}>LÆS MERE</Link>
+                    </button>
                     <button className="ticket">KØB BILLET</button>
                   </div>
                 </figcaption>
@@ -58,7 +61,9 @@ const EventCard = () => {
           })}
       </div>
       <div className="allEvents">
-        <button>SE ALLE FORESTILLINGER</button>
+        <button>
+          <Link to={`/events`}>SE ALLE FORESTILLINGER</Link>
+        </button>
       </div>
     </>
   );

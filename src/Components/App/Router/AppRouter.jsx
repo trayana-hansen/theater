@@ -6,6 +6,7 @@ import Actors from "../../Pages/Actors/Actors";
 import Events from "../../Pages/Events/Events";
 import NotFound from "../../Pages/NotFound/NotFound";
 import EventDetails from "../../Pages/Events/EventDetails";
+import ActorDetails from "../../Pages/Actors/ActorDetails";
 
 /* Creating a react component */
 const AppRouter = () => {
@@ -21,7 +22,10 @@ const AppRouter = () => {
       </Route>
 
       {/* Routes to actors and login */}
-      <Route path="/actors" element={<Actors />} />
+      <Route path="/actors">
+        <Route index element={<Actors />} />
+        <Route path=":actor_id" element={<ActorDetails />} />
+      </Route>
       <Route path="/login" element={<Login />} />
 
       {/* Routing to a 404 page */}
