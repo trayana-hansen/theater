@@ -5,6 +5,7 @@ import Login from "../../Pages/Login/Login";
 import Actors from "../../Pages/Actors/Actors";
 import Events from "../../Pages/Events/Events";
 import NotFound from "../../Pages/NotFound/NotFound";
+import EventDetails from "../../Pages/Events/EventDetails";
 
 /* Creating a react component */
 const AppRouter = () => {
@@ -14,7 +15,10 @@ const AppRouter = () => {
       <Route index element={<Home />} />
 
       {/* Route to events page */}
-      <Route path="/events" element={<Events />} />
+      <Route path="/events">
+        <Route index element={<Events />} />
+        <Route path=":event_id" element={<EventDetails />} />
+      </Route>
 
       {/* Routes to actors and login */}
       <Route path="/actors" element={<Actors />} />

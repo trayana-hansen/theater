@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./EventsAll.scss";
+import { Link } from "react-router-dom";
 
 const EventsAll = () => {
   const [allEvents, setAllEvents] = useState([]);
@@ -45,12 +46,14 @@ const EventsAll = () => {
                 <div id="detailsEvent">
                   <p>{data.stage.name}</p>
                   <p id="date">
-                    {formatDate(data.startdate)} -{formatDate(data.stopdate)}
+                    {formatDate(data.startdate)} - {formatDate(data.stopdate)}
                   </p>
                 </div>
 
                 <div className="buttons">
-                  <button className="readMore">LÆS MERE</button>
+                  <button className="readMore">
+                    <Link to={`/events/${data.id}`}>LÆS MERE</Link>
+                  </button>
                   <button className="ticket">KØB BILLET</button>
                 </div>
               </div>
