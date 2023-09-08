@@ -28,38 +28,56 @@ const EventDetails = () => {
 
     getData();
   }, [event_id]);
+
   return (
     <>
-      {data && (
-        <div key={data.event_id}>
-          <figure>
+      <div className="eventDetWrap">
+        {data && (
+          <figure key={event_id} className="eventDetFig">
             <div>
               <img
                 src={`http://localhost:4000/Assets/Images/events/medium/${data.image}`}
                 alt={data.title}
               />
             </div>
-            <div className="info">
-              <div>
-                <p>{data.stage.name}</p>
-                <p id="date">
-                  {formatDate(data.startdate)} - {formatDate(data.stopdate)}
-                </p>
-              </div>
-              <div>Billetpris {data.price.toFixed(2)} dkk</div>
+            <div id="detailsEvent">
+              <p>{data.stage.name}</p>
+              <p id="date">
+                {formatDate(data.startdate)} - {formatDate(data.stopdate)}
+              </p>
+              <p>Billetpris {data.price.toFixed(2)} dkk</p>
             </div>
-            <div>
-              <div>
-                <h2> {data.title} </h2>
-                <p>{data.genre.name}</p>
-              </div>
-              <div></div>
+            <h1>{data.title}</h1>
+            <p>{data.genre.name}</p>
+
+            <div className="buttons">
+              <button className="ticket">KØB BILLET</button>
+            </div>
+
+            <p>{data.description}</p>
+            <p>{data.duration_minutes} minutter</p>
+
+            <h2>MEDVIRKENDE</h2>
+            <div className="actorContainer">
+              {data.actors &&
+                data.actors.map((actor) => {
+                  return (
+                    <div key={actor.id} className="actorWrap">
+                      <figure className="actorFigure">
+                        <img
+                          src={`http://localhost:4000/Assets/Images/actors/${actor.image}`}
+                          alt={actor.name}
+                        />
+                        <p>{actor.name}</p>
+                      </figure>
+                    </div>
+                  );
+                })}
             </div>
           </figure>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };
-
 export default EventDetails;
