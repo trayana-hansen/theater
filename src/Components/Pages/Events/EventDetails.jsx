@@ -34,7 +34,7 @@ const EventDetails = () => {
       <div className="eventDetWrap">
         {data && (
           <figure key={event_id} className="eventDetFig">
-            <div>
+            <div className="imgDiv">
               <img
                 id="eventImg"
                 src={`http://localhost:4000/Assets/Images/events/medium/${data.image}`}
