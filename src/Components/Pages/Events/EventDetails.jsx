@@ -36,26 +36,38 @@ const EventDetails = () => {
           <figure key={event_id} className="eventDetFig">
             <div>
               <img
+                id="eventImg"
                 src={`http://localhost:4000/Assets/Images/events/medium/${data.image}`}
                 alt={data.title}
               />
             </div>
             <div id="detailsEvent">
-              <p>{data.stage.name}</p>
-              <p id="date">
-                {formatDate(data.startdate)} - {formatDate(data.stopdate)}
-              </p>
-              <p>Billetpris {data.price.toFixed(2)} dkk</p>
+              <div>
+                {data.stage ? <p>{data.stage.name}</p> : null}
+                <p id="date">
+                  {formatDate(data.startdate)} - {formatDate(data.stopdate)}
+                </p>
+              </div>
+              <div>
+                <p id="price">Billetpris {data.price} dkk</p>
+              </div>
             </div>
-            <h1>{data.title}</h1>
-            <p>{data.genre.name}</p>
+            <hr />
+            <div id="genreInfo">
+              <div>
+                <h1>{data.title}</h1>
+                {data.genre ? <p id="genre">{data.genre.name}</p> : null}
+              </div>
 
-            <div className="buttons">
-              <button className="ticket">KØB BILLET</button>
+              <div className="buttons">
+                <button className="ticket">KØB BILLET</button>
+              </div>
             </div>
 
-            <p>{data.description}</p>
-            <p>{data.duration_minutes} minutter</p>
+            <div id="description">
+              <p>{data.description}</p>
+              <p>{data.duration_minutes} minutter</p>
+            </div>
 
             <h2>MEDVIRKENDE</h2>
             <div className="actorContainer">
@@ -68,7 +80,7 @@ const EventDetails = () => {
                           src={`http://localhost:4000/Assets/Images/actors/${actor.image}`}
                           alt={actor.name}
                         />
-                        <p>{actor.name}</p>
+                        {actor.name ? <p>{actor.name}</p> : null}
                       </figure>
                     </div>
                   );

@@ -1,0 +1,3 @@
+import "./ActorDetails.scss";
+
+
