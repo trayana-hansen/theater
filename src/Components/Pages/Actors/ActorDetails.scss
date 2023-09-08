@@ -1,0 +1,57 @@
+@use "../../../Assets/bundles.scss" as c;
+
+.contentWrapper {
+  border: 1px solid c.$brown;
+  padding: 1rem;
+  margin: 2rem 0;
+
+  h1 {
+    font-size: 2rem;
+    color: c.$gold;
+    font-weight: 500;
+    line-height: 1em;
+    margin-left: 0.5rem;
+  }
+
+  .actorWrap {
+    .actorFig {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      .imgWrapper {
+        img {
+          max-width: 100%;
+          max-height: 70%;
+          display: block;
+          padding-top: 1rem;
+        }
+      }
+      .info {
+        #name {
+          text-transform: uppercase;
+          font-size: 1.2rem;
+          color: c.$grey;
+        }
+        #description {
+          color: c.$gold;
+          white-space: pre-wrap;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .contentWrapper {
+    border: none;
+    .actorWrap {
+      .actorFig {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        #name {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

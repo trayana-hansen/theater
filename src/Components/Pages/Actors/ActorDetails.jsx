@@ -25,20 +25,21 @@ const ActorDetails = () => {
 
   return (
     <>
-      <div className="actorWrap">
+      <div className="contentWrapper">
+        <h1>Skuespillere</h1>
         {data && (
-          <div key={data.id} className="contentWrapper">
-            <figure className="actorWrapper">
+          <div key={data.id} className="actorWrap">
+            <figure className="actorFig">
               <div className="imgWrapper">
                 <img
                   src={`http://localhost:4000/Assets/Images/actors/${data.image}`}
                   alt={data.name}
                 />
               </div>
-              <figcaption className="info">
-                <p>{data.name}</p>
-                <p>{data.description}</p>
-              </figcaption>
+              <div className="info">
+                <p id="name">{data.name}</p>
+                <p id="description">{data.description}</p>
+              </div>
             </figure>
           </div>
         )}
