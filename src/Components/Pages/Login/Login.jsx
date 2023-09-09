@@ -3,64 +3,70 @@ import axios from "axios";
 import { useState } from "react";
 
 const Login = () => {
-  // Destructer vars fra useAuth
+  // Get authentication datafrom useAuth hook
   const { loginData, setLoginData } = useAuth();
 
-  // Var til fejlmeddelelse
+  // Make a variable to handle the error messages
   const [message, setMessage] = useState("");
 
-  // Definerer funktion til at kalde api med form data
+  // Create a function to set in the login
   const sendLoginRequest = async (data) => {
+    // Retrieve username and password from the formData
     const formData = new URLSearchParams();
     formData.append("username", data.target.form.username.value);
     formData.append("password", data.target.form.password.value);
 
     try {
+      // Send a POST request to the login endpoint
       const result = await axios.post("http://localhost:4000/login", formData);
+
+      // Handle the session data if login is successful
       handleSessionData(result.data);
     } catch (err) {
-      /* Sætter bedsked var hvis der er en fejl */
+      // Sent an error message to the enduser if login was unsuccessful
       setMessage("Kunne ikke logge ind!");
+      // Display error code in the console
+      console.log(err);
     }
   };
 
-  // Definerer funktion til at håndtere form data til session storage
+
   const handleSessionData = (data) => {
     if (data) {
+      // Keep authentication token in session storage
       sessionStorage.setItem("token", JSON.stringify(data));
+
+      // Update the data in state
       setLoginData(data);
     }
   };
 
-  // Definerer funktion til log out
+  // Function to log out
   const logOut = () => {
+    // Remove the authentication token from session storage
     sessionStorage.removeItem("token");
+
+    // Remove the authentication data in the state
     setLoginData("");
   };
 
   return (
     <>
-      {/* Vis form hvis loginData er false */}
       {!loginData && !loginData.username ? (
-        // Sætter onSubmit event med closure function
+        // Login form if user is not logged in
         <form>
           <div>
-            {/* Input username med form hook settings */}
-            <label htmlFor="username">Brugernavn: </label>
+
             <input type="text" id="username" placeholder="Indtast brugernavn" />
           </div>
           <div>
-            {/* Input password med form hook settings */}
-            <label htmlFor="password">Adgangskode: </label>
+
             <input
               type="password"
               id="password"
               placeholder="Indtast adgangskode"
             />
-            {/* Vis meddelelse hvis der er en fejl */}
           </div>
-
-          {/* Tjekker om besked er true og viser den */}
           {message && <div>{message}</div>}
 
           <div>
@@ -70,10 +76,10 @@ const Login = () => {
           </div>
         </form>
       ) : (
-        // Vis logindata hvis bruger er logget ind
+        // Login info and user data if logged in
         <div>
           <p>
-            Du er logget ind som{" "}
+            Du er logget på som{" "}
             {`${loginData.firstname} ${loginData.lastname} `}
           </p>
           <button onClick={logOut}>Log ud</button>
