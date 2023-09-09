@@ -1,6 +1,8 @@
 import { useAuth } from "../../App/Auth/Auth";
 import axios from "axios";
 import { useState } from "react";
+import "./Login.scss";
+import Profile from "../../Pages/Profile/Profile";
 
 const Login = () => {
   // Get authentication datafrom useAuth hook
@@ -30,7 +32,6 @@ const Login = () => {
     }
   };
 
-
   const handleSessionData = (data) => {
     if (data) {
       // Keep authentication token in session storage
@@ -52,39 +53,49 @@ const Login = () => {
 
   return (
     <>
-      {!loginData && !loginData.username ? (
-        // Login form if user is not logged in
-        <form>
-          <div>
+      <div className="pageContainer">
+        <div className="loginContainer">
+          {/* If data is incorrect: */}
+          {!loginData ? (
+            // onSubmit event with closing
+            <form>
+              <div>
+                {/* Input username with form hook settings */}
 
-            <input type="text" id="username" placeholder="Indtast brugernavn" />
-          </div>
-          <div>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Indtast brugernavn"
+                />
+              </div>
+              <div>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Indtast adgangskode"
+                />
+                {/* Show message if there is an error */}
+              </div>
 
-            <input
-              type="password"
-              id="password"
-              placeholder="Indtast adgangskode"
-            />
-          </div>
-          {message && <div>{message}</div>}
+              {/* Check if message is true and display it */}
+              {message && <div>{message}</div>}
 
-          <div>
-            <button type="button" onClick={sendLoginRequest}>
-              Send
-            </button>
-          </div>
-        </form>
-      ) : (
-        // Login info and user data if logged in
-        <div>
-          <p>
-            Du er logget på som{" "}
-            {`${loginData.firstname} ${loginData.lastname} `}
-          </p>
-          <button onClick={logOut}>Log ud</button>
+              <div className="submit">
+                <button type="button" onClick={sendLoginRequest}>
+                  LOGIN
+                </button>
+              </div>
+            </form>
+          ) : (
+            // Show login data if user is logged in
+            <section>
+              <p>Du er logget ind som {`${loginData.username} `}</p>
+              <Profile />
+              <button onClick={logOut}>Log ud</button>
+            </section>
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 };
