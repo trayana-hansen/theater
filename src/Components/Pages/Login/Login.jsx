@@ -91,7 +91,9 @@ const Login = () => {
             <section>
               <p>Du er logget ind som {`${loginData.username} `}</p>
               <Profile />
-              <button onClick={logOut}>Log ud</button>
+              <button onClick={logOut} id="logout">
+                LOG UD
+              </button>
             </section>
           )}
         </div>
