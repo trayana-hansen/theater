@@ -76,7 +76,7 @@ const EventsAll = () => {
                   </button>
                   {/* Create a link to purchase tickets */}
                   <button className="ticket">
-                    <Link to="/tickets">KØB BILLET</Link>
+                    <Link to={`/tickets/${data.id}`}>KØB BILLET</Link>
                   </button>
                 </div>
               </div>

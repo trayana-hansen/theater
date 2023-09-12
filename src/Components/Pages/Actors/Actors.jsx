@@ -6,7 +6,6 @@ import Hero from "../../Partials/Hero/Hero";
 const Actors = () => {
   return (
     <>
-      <Hero />
       <AllActors />
     </>
   );
