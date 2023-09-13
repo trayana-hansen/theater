@@ -9,11 +9,13 @@ import EventDetails from "../../Pages/Events/EventDetails";
 import ActorDetails from "../../Pages/Actors/ActorDetails";
 import Tickets from "../../Pages/Tickets/Tickets";
 import Profile from "../../Pages/Profile/Profile";
+import Test from "../../Pages/Tickets/Test";
 
 /* Creating a react component */
 const AppRouter = () => {
   return (
     <Routes>
+      <Route path="/test" element={<Test />} />
       {/* Defining the home page of the website */}
       <Route index element={<Home />} />
 
