@@ -5,7 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./Components/Styles/Theme";
-import { AuthProvider } from "./Components/App/Auth/Auth.jsx";
+import { AuthProvider } from "./Components/App/Auth/AuthProvider.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

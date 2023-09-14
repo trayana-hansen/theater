@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../../App/Auth/Auth";
+import { useAuth } from "../../App/Auth/AuthProvider";
 
 const Tickets = () => {
   // State to store event data
@@ -54,10 +54,12 @@ const Tickets = () => {
 
   let handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(e);
     try {
       let res = await fetch("http://localhost:4000/reservations", {
         method: "POST",
         body: JSON.stringify({
+          event_id: event_id,
           firstname: firstname,
           lastname: lastname,
           email: email,
@@ -77,6 +79,7 @@ const Tickets = () => {
         setAddress("");
         setZipcode("");
         setCity("");
+
         setMessage("Reservation bekræftet");
       } else {
         setMessage("Fejl opståede ved bekræftelset");
@@ -93,6 +96,7 @@ const Tickets = () => {
           Fornavn:
           <input
             type="text"
+            name="firstname"
             value={firstname}
             placeholder="Fornavn"
             onChange={(e) => setFirstName(e.target.value)}
@@ -102,6 +106,7 @@ const Tickets = () => {
           Efternavn:
           <input
             type="text"
+            name="lastname"
             value={lastname}
             placeholder="Efternavn"
             onChange={(e) => setLastName(e.target.value)}
@@ -111,6 +116,7 @@ const Tickets = () => {
           Email:
           <input
             type="email"
+            name="email"
             value={email}
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -120,6 +126,7 @@ const Tickets = () => {
           Vejnavn og nr
           <input
             type="text"
+            name="address"
             value={address}
             placeholder="Vejnavn og nr"
             onChange={(e) => setAddress(e.target.value)}
@@ -129,6 +136,7 @@ const Tickets = () => {
           Postnr:
           <input
             type="number"
+            name="zipcode"
             value={zipcode}
             placeholder="Postnr"
             onChange={(e) => setZipcode(e.target.value)}
@@ -138,11 +146,13 @@ const Tickets = () => {
           By
           <input
             type="text"
+            name="city"
             value={city}
             placeholder="By"
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
+
         <button type="submit">GODKENDT BESTILLING</button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>

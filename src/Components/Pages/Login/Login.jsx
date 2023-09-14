@@ -1,4 +1,5 @@
-import { useAuth } from "../../App/Auth/Auth";
+import { useAuth } from "../../App/Auth/AuthProvider";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
 import "./Login.scss";
@@ -7,47 +8,39 @@ import Profile from "../../Pages/Profile/Profile";
 const Login = () => {
   // Get authentication datafrom useAuth hook
   const { loginData, setLoginData } = useAuth();
-
-  // Make a variable to handle the error messages
-  const [message, setMessage] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // Create a function to set in the login
-  const sendLoginRequest = async (data) => {
-    // Retrieve username and password from the formData
+
+  // Retrieve username and password from API
+
+  const formSubmit = async (form) => {
     const formData = new URLSearchParams();
-    formData.append("username", data.target.form.username.value);
-    formData.append("password", data.target.form.password.value);
+    formData.append("username", form.username);
+    formData.append("password", form.password);
+    const endpoint = `http://localhost:4000/login`;
 
     try {
-      // Send a POST request to the login endpoint
-      const result = await axios.post("http://localhost:4000/login", formData);
-
-      // Handle the session data if login is successful
+      const result = await axios.post(endpoint, formData);
       handleSessionData(result.data);
     } catch (err) {
-      // Sent an error message to the enduser if login was unsuccessful
-      setMessage("Kunne ikke logge ind!");
-      // Display error code in the console
-      console.log(err);
+      console.error(`Kunne ikke logge ind: ${err}`);
     }
   };
-
-  const handleSessionData = (data) => {
+  const handleSessionData = async (data) => {
     if (data) {
-      // Keep authentication token in session storage
       sessionStorage.setItem("token", JSON.stringify(data));
-
-      // Update the data in state
       setLoginData(data);
     }
   };
-
-  // Function to log out
   const logOut = () => {
-    // Remove the authentication token from session storage
+    // Fjerner login info fra session storage
     sessionStorage.removeItem("token");
-
-    // Remove the authentication data in the state
+    // Nulstiller tilstandsvariabel
     setLoginData("");
   };
 
@@ -55,43 +48,49 @@ const Login = () => {
     <>
       <div className="pageContainer">
         <div className="loginContainer">
-          {/* If data is incorrect: */}
-          {!loginData ? (
+          {/* If data is incorre ct: */}
+          {!loginData && !loginData.username ? (
             // onSubmit event with closing
-            <form>
+            <form onSubmit={handleSubmit(formSubmit)}>
               <div>
                 {/* Input username with form hook settings */}
 
                 <input
                   type="text"
-                  id="username"
                   placeholder="Indtast brugernavn"
+                  {...register("username", { required: true })}
                 />
+                {/* Udskriver valideringsfejl hvis der er nogle */}
+                {errors.username && (
+                  <span className="error">Du skal indtaste dit brugernavn</span>
+                )}
               </div>
               <div>
                 <input
+                  placeholder="Indtast password"
                   type="password"
-                  id="password"
-                  placeholder="Indtast adgangskode"
+                  {...register("password", { required: true })}
                 />
                 {/* Show message if there is an error */}
+                {errors.password && (
+                  <span className="error">
+                    Du skal indtaste din adgangskode
+                  </span>
+                )}
               </div>
 
-              {/* Check if message is true and display it */}
-              {message && <div>{message}</div>}
-
               <div className="submit">
-                <button type="button" onClick={sendLoginRequest}>
-                  LOGIN
-                </button>
+                <button type="submit">LOGIN</button>
               </div>
             </form>
           ) : (
             // Show login data if user is logged in
             <section>
-              <p>Du er logget ind som {`${loginData.username} `}</p>
+              <p>
+                {`Du er logget ind som ${loginData.user.firstname} ${loginData.user.lastname} `}{" "}
+              </p>
               <Profile />
-              <button onClick={logOut} id="logout">
+              <button onClick={() => logOut()} id="logout">
                 LOG UD
               </button>
             </section>
