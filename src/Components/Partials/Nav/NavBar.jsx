@@ -2,11 +2,13 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
 import Logo from "../../../Assets/SVG/logo.svg";
+import { useAuth } from "../../App/Auth/AuthProvider";
 
 const NavBar = () => {
   /* Setting up the variable to handle the state of mobile menu */
 
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const { loginData } = useAuth();
   return (
     <>
       {/* Start of the navigation component */}
@@ -92,16 +94,26 @@ const NavBar = () => {
                 SKUESPILLERE
               </NavLink>
             </li>
-
             <li>
-              <NavLink
-                to="/login"
-                style={({ isActive }) => ({
-                  color: isActive ? "#d39d5b" : "#707070",
-                })}
-              >
-                LOGIN
-              </NavLink>
+              {loginData ? (
+                <NavLink
+                  to="/login"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#d39d5b" : "#707070",
+                  })}
+                >
+                  MIN SIDE
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/login"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#d39d5b" : "#707070",
+                  })}
+                >
+                  LOGIN
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>

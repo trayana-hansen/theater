@@ -1,161 +1,145 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useAuth } from "../../App/Auth/AuthProvider";
+import { useParams } from "react-router-dom";
 
+/**
+ * Post Component
+ * Formular til at poste data til API
+ */
 const Tickets = () => {
-  // State to store event data
-  const [data, setData] = useState([{}]);
-
-  // Get the `event_id` parameter from the route using `useParams` hook
+  const { loginData } = useAuth();
   const { event_id } = useParams();
 
-  // Function to format a date in a user-friendly format
-  const formatDate = (dateNew) => {
-    const date = new Date(dateNew);
-    const options = { day: "2-digit", month: "short", year: "numeric" };
-    return date.toLocaleDateString("da-DK", options);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // Effect to fetch data when the component mounts or `event_id` changes
-  useEffect(() => {
-    // Construct the URL to fetch event details based on the `event_id`
-    const url = `http://localhost:4000/events/${event_id}`;
+  const formSubmit = async (formObject) => {
+    const api_endpoint = "http://localhost:4000/reservations";
 
-    // Function to fetch event data from the API
-    const getData = async () => {
-      try {
-        // Send a GET request to the API endpoint
-        const result = await axios.get(url);
+    const formData = new URLSearchParams();
+    formData.append("event_id", event_id); // Use the event_id from URL params
+    formData.append("firstname", formObject.firstname);
+    formData.append("lastname", formObject.lastname);
+    formData.append("address", formObject.address);
+    formData.append("zipcode", formObject.zipcode);
+    formData.append("city", formObject.city);
+    formData.append("email", formObject.email);
+    formData.append("seats[0]", 1);
+    formData.append("seats[1]", 2);
 
-        // Log the result to the console for debugging
-        console.log(result);
+    console.log(...formData);
 
-        // Update the `data` state with the received event data
-        setData(result.data);
-      } catch (err) {
-        // Handle any errors by logging them to the console
-        console.error(err);
-      }
+    const options = {
+      headers: {
+        Authorization: `Bearer ${loginData.access_token}`,
+      },
     };
 
-    // Call the `getData` function to fetch event data
-    getData();
-  }, [event_id]); // Run the effect whenever `event_id` changes
-
-  const { loginData } = useAuth();
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [city, setCity] = useState("");
-  const [message, setMessage] = useState("");
-
-  let handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(e);
     try {
-      let res = await fetch("http://localhost:4000/reservations", {
-        method: "POST",
-        body: JSON.stringify({
-          event_id: event_id,
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          address: address,
-          zipcode: zipcode,
-          city: city,
-        }),
-        headers: {
-          Authorization: `Bearer ${loginData.access_token}`,
-        },
-      });
-
-      if (res.status === 200) {
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setAddress("");
-        setZipcode("");
-        setCity("");
-
-        setMessage("Reservation bekræftet");
-      } else {
-        setMessage("Fejl opståede ved bekræftelset");
+      const result = await axios.post(api_endpoint, formData, options);
+      if (result.data) {
+        console.log(result.data);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 
   return (
-    <div className="reservation">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Fornavn:
+    <div>
+      <form onSubmit={handleSubmit(formSubmit)}>
+        <input type="hidden" value={event_id} {...register("event_id")} />
+        <div>
+          <label htmlFor="firstname">Fornavn:</label>
           <input
-            type="text"
-            name="firstname"
-            value={firstname}
-            placeholder="Fornavn"
-            onChange={(e) => setFirstName(e.target.value)}
+            {...register("firstname", {
+              required: "Du skal indtaste dit fornavn",
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "Du skal indtaste et gyldigt navn",
+              },
+            })}
           />
-        </label>
-        <label>
-          Efternavn:
-          <input
-            type="text"
-            name="lastname"
-            value={lastname}
-            placeholder="Efternavn"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Vejnavn og nr
-          <input
-            type="text"
-            name="address"
-            value={address}
-            placeholder="Vejnavn og nr"
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </label>
-        <label>
-          Postnr:
-          <input
-            type="number"
-            name="zipcode"
-            value={zipcode}
-            placeholder="Postnr"
-            onChange={(e) => setZipcode(e.target.value)}
-          />
-        </label>
-        <label>
-          By
-          <input
-            type="text"
-            name="city"
-            value={city}
-            placeholder="By"
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </label>
+          {errors.firstname && <span>{errors.firstname.message}</span>}
+        </div>
 
-        <button type="submit">GODKENDT BESTILLING</button>
+        <div>
+          <label htmlFor="lastname">Efternavn:</label>
+          <input
+            {...register("lastname", {
+              required: "Du skal indtaste dit efternavn",
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "Du skal indtaste et gyldigt navn",
+              },
+            })}
+          />
+          {errors.lastname && <span>{errors.lastname.message}</span>}
+        </div>
 
-        <div className="message">{message ? <p>{message}</p> : null}</div>
+        <div>
+          <label htmlFor="address">Adresse:</label>
+          <input
+            {...register("address", {
+              required: "Du skal indtaste din adresse",
+            })}
+          />
+          {errors.address && <span>{errors.address.message}</span>}
+        </div>
+
+        <div>
+          <label htmlFor="zipcode">Postnummer:</label>
+          <input
+            {...register("zipcode", {
+              required: "Du skal indtaste dit postnummer",
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "Du skal indtaste et gyldigt postnummer",
+              },
+              min: {
+                value: 999,
+                message: "Postnummer kan ikke være mindre end 1000",
+              },
+              max: {
+                value: 9990,
+                message: "Postnummer kan ikke være større end 9990",
+              },
+            })}
+          />
+          {errors.zipcode && <span>{errors.zipcode.message}</span>}
+        </div>
+
+        <div>
+          <label htmlFor="city">By:</label>
+          <input
+            {...register("city", {
+              required: "Du skal indtaste et bynavn",
+            })}
+          />
+          {errors.city && <span>{errors.city.message}</span>}
+        </div>
+
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            {...register("email", {
+              required: "Du skal indtaste din email",
+              pattern: {
+                value: /^\S+@\S+$/,
+                message: "Du skal indtaste en gyldig mailadresse",
+              },
+            })}
+          />
+          {errors.email && <span>{errors.email.message}</span>}
+        </div>
+
+        <div>
+          <button>Send</button>
+        </div>
       </form>
     </div>
   );

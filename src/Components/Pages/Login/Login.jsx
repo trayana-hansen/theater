@@ -1,7 +1,6 @@
 import { useAuth } from "../../App/Auth/AuthProvider";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useState } from "react";
 import "./Login.scss";
 import Profile from "../../Pages/Profile/Profile";
 
