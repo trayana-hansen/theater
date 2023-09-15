@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Review from "./Review";
 
 const EventDetails = () => {
   // State to store event data
@@ -102,6 +103,7 @@ const EventDetails = () => {
                     <div key={actor.id} className="actorWrap">
                       <figure className="actorFigure">
                         {/* Display actor's image */}
+
                         <img
                           src={`http://localhost:4000/Assets/Images/actors/${actor.image}`}
                           alt={actor.name}
@@ -116,6 +118,7 @@ const EventDetails = () => {
           </figure>
         )}
       </div>
+      <Review />
     </>
   );
 };
